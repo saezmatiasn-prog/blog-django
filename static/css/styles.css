@@ -46,6 +46,10 @@ main {
     border-radius: 50%;
 }
 
+.form-preview-img {
+    max-height: 160px;
+}
+
 .form-card {
     max-width: 720px;
 }

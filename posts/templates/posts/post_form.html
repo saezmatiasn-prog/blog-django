@@ -7,6 +7,11 @@
     <div class="card-body p-4">
         <h1 class="h4 mb-4">{% if object %}Editar “{{ object.titulo }}”{% else %}Nuevo post{% endif %}</h1>
 
+        {% if object.imagen %}
+            <img src="{{ object.imagen.url }}" class="img-thumbnail mb-3 form-preview-img" alt="Imagen actual"
+                 onerror="this.remove();">
+        {% endif %}
+
         <form method="post" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
             {% include "includes/form_fields.html" %}
