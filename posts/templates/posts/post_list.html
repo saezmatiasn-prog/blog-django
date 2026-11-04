@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Inicio{% endblock %}
 
@@ -15,6 +16,12 @@
         {% for post in posts %}
             <div class="col-md-6 col-lg-4">
                 <article class="card h-100 shadow-sm">
+                    {% if post.imagen %}
+                        <img src="{{ post.imagen.url }}" class="card-img-top post-card-img" alt="{{ post.titulo }}"
+                             onerror="this.onerror=null;this.src='{% static 'img/sin-imagen.svg' %}';">
+                    {% else %}
+                        <img src="{% static 'img/sin-imagen.svg' %}" class="card-img-top post-card-img" alt="Post sin imagen">
+                    {% endif %}
                     <div class="card-body d-flex flex-column">
                         <h2 class="h5 card-title">{{ post.titulo }}</h2>
                         <p class="card-text text-muted small mb-2">

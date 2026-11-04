@@ -11,6 +11,11 @@
         Por <strong>{{ post.autor.username }}</strong> &middot; {{ post.fecha_creacion|date:"d/m/Y H:i" }}
     </p>
 
+    {% if post.imagen %}
+        <img src="{{ post.imagen.url }}" class="post-detail-img mb-4" alt="{{ post.titulo }}"
+             onerror="this.remove();">
+    {% endif %}
+
     <div class="post-content">
         {{ post.contenido|linebreaks }}
     </div>
