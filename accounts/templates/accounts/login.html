@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar sesión{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm mx-auto auth-card">
+    <div class="card-body p-4">
+        <h1 class="h4 mb-3">Iniciar sesión</h1>
+
+        {% if next and not user.is_authenticated %}
+            <div class="alert alert-warning small">Tenés que iniciar sesión para acceder a esa página.</div>
+        {% endif %}
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% include "includes/form_fields.html" %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+        </form>
+
+        <p class="text-center small mt-3 mb-0">
+            ¿No tenés cuenta? <a href="{% url 'accounts:registro' %}">Registrate</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

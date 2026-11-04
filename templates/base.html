@@ -24,6 +24,27 @@
                         <a class="nav-link" href="{% url 'posts:post_list' %}">Inicio</a>
                     </li>
                 </ul>
+
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <span class="navbar-text me-3">Hola, {{ user.username }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <form method="post" action="{% url 'accounts:logout' %}" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-light btn-sm mt-1">Cerrar sesión</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'accounts:login' %}">Iniciar sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary btn-sm mt-1 ms-lg-2" href="{% url 'accounts:registro' %}">Registrarse</a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </nav>

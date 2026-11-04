@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Apps del proyecto
     "posts",
+    "accounts",
 ]
 
 MIDDLEWARE = [
@@ -114,6 +115,13 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+
+# Autenticación
+
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "posts:post_list"
+LOGOUT_REDIRECT_URL = "posts:post_list"
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

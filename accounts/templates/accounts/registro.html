@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Crear cuenta{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm mx-auto auth-card">
+    <div class="card-body p-4">
+        <h1 class="h4 mb-3">Crear cuenta</h1>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% include "includes/form_fields.html" %}
+            <button type="submit" class="btn btn-primary w-100">Registrarme</button>
+        </form>
+
+        <p class="text-center small mt-3 mb-0">
+            ¿Ya tenés cuenta? <a href="{% url 'accounts:login' %}">Iniciá sesión</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
