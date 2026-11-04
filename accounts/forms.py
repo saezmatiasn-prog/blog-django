@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 from config.forms import BootstrapFormMixin
 
+from .models import Perfil
+
 
 class RegistroForm(BootstrapFormMixin, UserCreationForm):
     email = forms.EmailField(label="Correo electrónico", required=True)
@@ -15,3 +17,23 @@ class RegistroForm(BootstrapFormMixin, UserCreationForm):
 
 class LoginForm(BootstrapFormMixin, AuthenticationForm):
     pass
+
+
+class UsuarioForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "email")
+        labels = {
+            "first_name": "Nombre",
+            "last_name": "Apellido",
+            "email": "Correo electrónico",
+        }
+
+
+class PerfilForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = ("avatar", "bio")
+        widgets = {
+            "bio": forms.Textarea(attrs={"rows": 4}),
+        }

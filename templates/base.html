@@ -32,14 +32,28 @@
 
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <span class="navbar-text me-3">Hola, {{ user.username }}</span>
-                        </li>
-                        <li class="nav-item">
-                            <form method="post" action="{% url 'accounts:logout' %}" class="d-inline">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-outline-light btn-sm mt-1">Cerrar sesión</button>
-                            </form>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if user.perfil.avatar %}
+                                    <img src="{{ user.perfil.avatar.url }}" class="avatar-sm" alt=""
+                                         onerror="this.onerror=null;this.src='{% static 'img/avatar-default.svg' %}';">
+                                {% else %}
+                                    <img src="{% static 'img/avatar-default.svg' %}" class="avatar-sm" alt="">
+                                {% endif %}
+                                {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="{% url 'accounts:perfil' %}">Mi perfil</a></li>
+                                <li><a class="dropdown-item" href="{% url 'accounts:editar_perfil' %}">Editar perfil</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form method="post" action="{% url 'accounts:logout' %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                                    </form>
+                                </li>
+                            </ul>
                         </li>
                     {% else %}
                         <li class="nav-item">

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Editar perfil{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm mx-auto form-card">
+    <div class="card-body p-4">
+        <h1 class="h4 mb-4">Editar perfil</h1>
+
+        <form method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+
+            <h2 class="h6 text-muted text-uppercase mb-3">Datos personales</h2>
+            {% include "includes/form_fields.html" with form=usuario_form %}
+
+            <h2 class="h6 text-muted text-uppercase mt-4 mb-3">Perfil público</h2>
+            {% include "includes/form_fields.html" with form=perfil_form %}
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <a href="{% url 'accounts:perfil' %}" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

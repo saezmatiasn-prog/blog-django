@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Mi perfil{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card shadow-sm text-center">
+            <div class="card-body p-4">
+                {% if perfil.avatar %}
+                    <img src="{{ perfil.avatar.url }}" class="avatar mb-3" alt="Imagen de perfil de {{ user.username }}"
+                         onerror="this.onerror=null;this.src='{% static 'img/avatar-default.svg' %}';">
+                {% else %}
+                    <img src="{% static 'img/avatar-default.svg' %}" class="avatar mb-3" alt="Avatar por defecto">
+                {% endif %}
+
+                <h1 class="h4 mb-0">{{ user.get_full_name|default:user.username }}</h1>
+                <p class="text-muted">@{{ user.username }}</p>
+
+                {% if perfil.bio %}
+                    <p>{{ perfil.bio|linebreaksbr }}</p>
+                {% else %}
+                    <p class="text-muted fst-italic">Todavía no escribiste una biografía.</p>
+                {% endif %}
+
+                <ul class="list-unstyled small text-muted">
+                    <li>{{ user.email|default:"Sin correo cargado" }}</li>
+                    <li>Miembro desde {{ user.date_joined|date:"d/m/Y" }}</li>
+                </ul>
+
+                <a href="{% url 'accounts:editar_perfil' %}" class="btn btn-outline-primary">Editar perfil</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 mb-0">Mis publicaciones ({{ mis_posts|length }})</h2>
+            <a href="{% url 'posts:post_create' %}" class="btn btn-primary btn-sm">+ Nuevo post</a>
+        </div>
+
+        {% if mis_posts %}
+            <div class="list-group shadow-sm">
+                {% for post in mis_posts %}
+                    <a href="{{ post.get_absolute_url }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <span>{{ post.titulo }}</span>
+                        <small class="text-muted">{{ post.fecha_creacion|date:"d/m/Y" }}</small>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">Todavía no publicaste ningún post.</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
