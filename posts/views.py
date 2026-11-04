@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
@@ -13,7 +14,18 @@ class PostListView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        return Post.objects.select_related("autor")
+        queryset = Post.objects.select_related("autor")
+        self.query = self.request.GET.get("q", "").strip()
+        if self.query:
+            queryset = queryset.filter(
+                Q(titulo__icontains=self.query) | Q(contenido__icontains=self.query)
+            )
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["query"] = self.query
+        return context
 
 
 class PostDetailView(DetailView):
