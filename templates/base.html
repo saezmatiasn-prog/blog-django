@@ -23,6 +23,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'posts:post_list' %}">Inicio</a>
                     </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'posts:post_create' %}">Nuevo post</a>
+                        </li>
+                    {% endif %}
                 </ul>
 
                 <ul class="navbar-nav">

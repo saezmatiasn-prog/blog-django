@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Acceso denegado{% endblock %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-6">Acceso denegado</h1>
+    <p class="text-muted">Solo el autor de un post puede editarlo o eliminarlo.</p>
+    <a href="{% url 'posts:post_list' %}" class="btn btn-primary">Volver al inicio</a>
+</div>
+{% endblock %}
