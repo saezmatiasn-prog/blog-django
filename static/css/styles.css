@@ -1,5 +1,28 @@
+/* Checkpoint: tema oscuro con acento rojo */
+
+:root {
+    --cp-accent: #e8432e;
+    --cp-accent-hover: #c9361f;
+    --cp-accent-active: #ad2e1a;
+    --cp-accent-text: #ff6b4f;
+    --cp-bg: #111114;
+    --cp-surface: #1b1b20;
+    --cp-border: #2c2c34;
+}
+
+[data-bs-theme="dark"] {
+    --bs-body-bg: var(--cp-bg);
+    --bs-body-color: #e6e6ea;
+    --bs-border-color: var(--cp-border);
+    --bs-primary: var(--cp-accent);
+    --bs-primary-rgb: 232, 67, 46;
+    --bs-link-color: var(--cp-accent-text);
+    --bs-link-color-rgb: 255, 107, 79;
+    --bs-link-hover-color: #ff8d76;
+    --bs-link-hover-color-rgb: 255, 141, 118;
+}
+
 body {
-    background-color: #f5f6f8;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -9,10 +32,83 @@ main {
     flex: 1;
 }
 
+/* Barra de navegación y pie */
+
+.navbar-cp {
+    background-color: #0a0a0c;
+    border-bottom: 2px solid var(--cp-accent);
+}
+
+.footer-cp {
+    background-color: #0a0a0c;
+    border-top: 1px solid var(--cp-border);
+}
+
+/* Componentes de Bootstrap con el color de acento */
+
+.card {
+    --bs-card-bg: var(--cp-surface);
+    --bs-card-border-color: var(--cp-border);
+}
+
+.list-group {
+    --bs-list-group-bg: var(--cp-surface);
+    --bs-list-group-border-color: var(--cp-border);
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--cp-accent);
+    --bs-btn-border-color: var(--cp-accent);
+    --bs-btn-hover-bg: var(--cp-accent-hover);
+    --bs-btn-hover-border-color: var(--cp-accent-hover);
+    --bs-btn-active-bg: var(--cp-accent-active);
+    --bs-btn-active-border-color: var(--cp-accent-active);
+    --bs-btn-disabled-bg: var(--cp-accent);
+    --bs-btn-disabled-border-color: var(--cp-accent);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--cp-accent-text);
+    --bs-btn-border-color: var(--cp-accent);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--cp-accent);
+    --bs-btn-hover-border-color: var(--cp-accent);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--cp-accent-hover);
+    --bs-btn-active-border-color: var(--cp-accent-hover);
+}
+
+.pagination {
+    --bs-pagination-color: var(--cp-accent-text);
+    --bs-pagination-hover-color: var(--cp-accent-text);
+    --bs-pagination-active-bg: var(--cp-accent);
+    --bs-pagination-active-border-color: var(--cp-accent);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--cp-accent);
+    box-shadow: 0 0 0 0.25rem rgba(232, 67, 46, 0.25);
+}
+
+/* Portada */
+
+.hero-cp {
+    background: linear-gradient(135deg, #2a0f0a 0%, #1b1b20 55%, #111114 100%);
+    border: 1px solid #3b1c16;
+}
+
+.hero-kicker {
+    color: var(--cp-accent-text);
+    letter-spacing: 0.08em;
+}
+
+/* Posts */
+
 .post-card-img {
     height: 200px;
     object-fit: cover;
-    background-color: #e9ecef;
+    background-color: #24242b;
 }
 
 .post-detail {
@@ -31,12 +127,15 @@ main {
     line-height: 1.75;
 }
 
+/* Perfil */
+
 .avatar {
     width: 140px;
     height: 140px;
     object-fit: cover;
     border-radius: 50%;
-    background-color: #e9ecef;
+    background-color: #24242b;
+    border: 2px solid var(--cp-accent);
 }
 
 .avatar-sm {
@@ -45,6 +144,8 @@ main {
     object-fit: cover;
     border-radius: 50%;
 }
+
+/* Formularios */
 
 .form-preview-img {
     max-height: 160px;

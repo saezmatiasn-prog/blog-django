@@ -1,9 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img" aria-label="Post sin imagen">
-  <rect width="800" height="450" fill="#e9ecef"/>
-  <g fill="none" stroke="#adb5bd" stroke-width="12" stroke-linejoin="round">
-    <rect x="310" y="150" width="180" height="130" rx="12"/>
-    <polyline points="320,270 380,210 420,245 450,220 480,270"/>
+  <rect width="800" height="450" fill="#24242b"/>
+  <g fill="#3a3a44" shape-rendering="crispEdges">
+    <rect x="330" y="150" width="140" height="20"/>
+    <rect x="310" y="170" width="180" height="80"/>
+    <rect x="330" y="250" width="40" height="20"/>
+    <rect x="430" y="250" width="40" height="20"/>
   </g>
-  <circle cx="440" cy="185" r="14" fill="#adb5bd"/>
-  <text x="400" y="330" font-family="Arial, sans-serif" font-size="28" fill="#868e96" text-anchor="middle">Sin imagen</text>
+  <g fill="#24242b" shape-rendering="crispEdges">
+    <rect x="340" y="195" width="20" height="40"/>
+    <rect x="330" y="205" width="40" height="20"/>
+    <rect x="430" y="195" width="20" height="20"/>
+    <rect x="450" y="215" width="20" height="20"/>
+  </g>
+  <text x="400" y="320" font-family="Arial, sans-serif" font-size="26" fill="#7a7a86" text-anchor="middle">Sin imagen</text>
 </svg>
