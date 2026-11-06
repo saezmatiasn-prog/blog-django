@@ -1,6 +1,8 @@
-# Blog Web con Django
+# Checkpoint: blog de videojuegos con Django
 
-Blog web desarrollado con Django como proyecto final del curso de Python. Permite que cualquier visitante lea las publicaciones y que los usuarios registrados escriban, editen y eliminen sus propios posts con imágenes, además de gestionar su perfil.
+**Checkpoint** es un blog web sobre la historia y el futuro de los videojuegos, desarrollado con Django como proyecto final del curso de Python. Está dedicado a dos temas: el legado de **DOOM** (1993) y su influencia en la cultura y la industria de los videojuegos, y el impacto de la **inteligencia artificial** en la forma de crear y jugar videojuegos hoy.
+
+Cualquier visitante puede leer las publicaciones. Los usuarios registrados pueden escribir, editar y eliminar sus propios posts con imágenes, además de gestionar su perfil.
 
 ## Tecnologías
 
@@ -9,7 +11,7 @@ Blog web desarrollado con Django como proyecto final del curso de Python. Permit
 - **SQLite** como base de datos
 - **Pillow** para el manejo de imágenes
 - **python-decouple** para las variables de entorno
-- **Bootstrap** 5.3 (desde CDN) para el diseño
+- **Bootstrap** 5.3 (desde CDN) para el diseño, en modo oscuro con estilos propios
 
 ## Funcionalidades
 
@@ -57,7 +59,7 @@ blog-django/
 ├── posts/               # App de publicaciones: modelo, vistas CRUD, búsqueda, tests
 ├── accounts/            # App de usuarios: registro, login, perfil, tests
 ├── templates/           # Template base, página 403 y fragmentos reutilizables
-├── static/              # CSS e imágenes por defecto
+├── static/              # CSS, logo e imágenes por defecto
 ├── manage.py
 ├── requirements.txt
 ├── .env.example         # Modelo del archivo .env
@@ -154,10 +156,10 @@ Abrí `http://127.0.0.1:8000/` en el navegador.
 
 El repositorio **no incluye** la base de datos (`db.sqlite3`) ni las imágenes subidas (`media/`), así que el blog empieza vacío. Después de seguir los pasos de instalación:
 
-1. Entrá a `http://127.0.0.1:8000/` sin iniciar sesión: vas a ver el listado vacío y el menú con **Iniciar sesión** y **Registrarse**.
+1. Entrá a `http://127.0.0.1:8000/` sin iniciar sesión: vas a ver la portada del blog sin publicaciones y el menú con **Iniciar sesión** y **Registrarse**.
 2. Probá entrar a `http://127.0.0.1:8000/posts/nuevo/`: te redirige al login porque la ruta está protegida.
 3. Hacé clic en **Registrarse** y creá una cuenta. Al terminar, la sesión queda iniciada.
-4. Hacé clic en **Nuevo post**, completá título y contenido, elegí una imagen y publicá.
+4. Hacé clic en **Nuevo post**, completá título y contenido (por ejemplo, un post sobre DOOM o sobre la IA en los videojuegos), elegí una imagen y publicá.
 5. Creá otro post sin imagen: en el listado se muestra la imagen por defecto.
 6. Desde el detalle de un post propio, probá **Editar** y **Eliminar**.
 7. Usá el buscador de la barra superior con una palabra del título o del contenido, y también con una palabra que no exista para ver el aviso de "sin resultados".
