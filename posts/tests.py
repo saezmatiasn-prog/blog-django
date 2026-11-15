@@ -13,10 +13,11 @@ from .models import Post
 MEDIA_TEMPORAL = tempfile.mkdtemp()
 
 
-def crear_imagen(nombre="foto.png"):
+def crear_imagen(nombre="foto.png", relleno_mb=0):
     buffer = BytesIO()
     Image.new("RGB", (60, 40), "steelblue").save(buffer, "PNG")
-    return SimpleUploadedFile(nombre, buffer.getvalue(), content_type="image/png")
+    contenido = buffer.getvalue() + b"\0" * (relleno_mb * 1024 * 1024)
+    return SimpleUploadedFile(nombre, contenido, content_type="image/png")
 
 
 @override_settings(MEDIA_ROOT=MEDIA_TEMPORAL)
@@ -68,6 +69,26 @@ class PostViewsTests(TestCase):
         self.assertEqual(post.autor, self.autor)
         self.assertTrue(post.imagen.name.startswith("posts/"))
         self.assertContains(self.client.get(post.get_absolute_url()), post.imagen.url)
+
+    def test_rechaza_imagen_de_mas_de_5_mb(self):
+        self.client.force_login(self.autor)
+        respuesta = self.client.post(
+            reverse("posts:post_create"),
+            {"titulo": "Foto pesada", "contenido": "Texto", "imagen": crear_imagen(relleno_mb=6)},
+        )
+        self.assertEqual(respuesta.status_code, 200)
+        self.assertContains(respuesta, "no puede superar los 5 MB")
+        self.assertFalse(Post.objects.filter(titulo="Foto pesada").exists())
+
+    def test_rechaza_archivo_que_no_es_imagen(self):
+        self.client.force_login(self.autor)
+        archivo = SimpleUploadedFile("falso.png", b"esto no es una imagen", content_type="image/png")
+        respuesta = self.client.post(
+            reverse("posts:post_create"),
+            {"titulo": "Archivo falso", "contenido": "Texto", "imagen": archivo},
+        )
+        self.assertEqual(respuesta.status_code, 200)
+        self.assertFalse(Post.objects.filter(titulo="Archivo falso").exists())
 
     def test_crear_post_sin_imagen(self):
         self.client.force_login(self.autor)

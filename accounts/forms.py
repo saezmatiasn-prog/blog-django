@@ -3,6 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
 from config.forms import BootstrapFormMixin
+from config.validators import TAMANO_MAXIMO_IMAGEN_MB, validar_tamano_imagen
 
 from .models import Perfil
 
@@ -37,3 +38,8 @@ class PerfilForm(BootstrapFormMixin, forms.ModelForm):
         widgets = {
             "bio": forms.Textarea(attrs={"rows": 4}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["avatar"].validators.append(validar_tamano_imagen)
+        self.fields["avatar"].help_text = f"Opcional. Hasta {TAMANO_MAXIMO_IMAGEN_MB} MB."

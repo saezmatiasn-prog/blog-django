@@ -88,3 +88,21 @@ class CuentasTests(TestCase):
         self.assertEqual(usuario.first_name, "Ana")
         self.assertEqual(usuario.perfil.bio, "Me gusta escribir.")
         self.assertTrue(usuario.perfil.avatar.name.startswith("avatares/"))
+
+    def test_rechaza_avatar_de_mas_de_5_mb(self):
+        usuario = User.objects.create_user("lector", password="ClaveDePrueba123")
+        self.client.force_login(usuario)
+
+        buffer = BytesIO()
+        Image.new("RGB", (50, 50), "orange").save(buffer, "PNG")
+        contenido = buffer.getvalue() + b"\0" * (6 * 1024 * 1024)
+        avatar = SimpleUploadedFile("pesado.png", contenido, content_type="image/png")
+
+        respuesta = self.client.post(
+            reverse("accounts:editar_perfil"),
+            {"first_name": "", "last_name": "", "email": "", "bio": "", "avatar": avatar},
+        )
+        self.assertEqual(respuesta.status_code, 200)
+        self.assertContains(respuesta, "no puede superar los 5 MB")
+        usuario.refresh_from_db()
+        self.assertFalse(usuario.perfil.avatar)

@@ -18,7 +18,7 @@ Cualquier visitante puede leer las publicaciones. Los usuarios registrados puede
 **Publicaciones**
 - Listado de posts con paginación y detalle de cada post.
 - Crear, editar y eliminar posts desde la interfaz web (no solo desde el admin).
-- Imagen opcional en cada post. Si un post no tiene imagen, se muestra una imagen por defecto.
+- Imagen opcional en cada post, de hasta 5 MB. Si un post no tiene imagen, se muestra una imagen por defecto.
 - Solo el autor de un post puede editarlo o eliminarlo.
 - Búsqueda por título o contenido, con aviso cuando no hay resultados.
 
@@ -31,6 +31,7 @@ Cualquier visitante puede leer las publicaciones. Los usuarios registrados puede
 **Seguridad**
 - Crear, editar y eliminar posts, ver el perfil y editarlo requieren sesión iniciada. La protección está en las vistas (`LoginRequiredMixin` y `@login_required`), no solo en los botones.
 - Un visitante anónimo puede ver el listado y el detalle de los posts.
+- Las imágenes subidas se validan: solo se aceptan archivos de imagen reales de hasta 5 MB.
 - La clave secreta y la configuración sensible se leen de un archivo `.env` que no se sube al repositorio.
 
 ## Rutas principales
@@ -170,7 +171,7 @@ Las imágenes que subas se guardan en la carpeta `media/`, que se crea automáti
 
 ## Tests automáticos
 
-El proyecto incluye tests para el CRUD de posts, la carga de imágenes, la búsqueda, el registro, el login y logout, el perfil y la protección de rutas:
+El proyecto incluye tests para el CRUD de posts, la carga y validación de imágenes, la búsqueda, el registro, el login y logout, el perfil y la protección de rutas:
 
 ```bash
 python manage.py test
